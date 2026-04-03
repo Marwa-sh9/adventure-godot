@@ -1,0 +1,80 @@
+[gd_scene load_steps=13 format=3 uid="uid://dx45khjbhes7m"]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_rnkar"]
+[ext_resource type="Texture2D" uid="uid://dv10nn4dpqmb5" path="res://MyMap/bunny/bunny1_walk2.png" id="2_a4txx"]
+[ext_resource type="Texture2D" uid="uid://1l7ts2uc0uao" path="res://MyMap/bunny/bunny1_walk1.png" id="3_8a6u0"]
+[ext_resource type="Texture2D" uid="uid://dk8m2hp1cprvq" path="res://MyMap/bunny/bunny1_ready.png" id="4_as7kh"]
+[ext_resource type="Texture2D" uid="uid://co0d0boon1ayw" path="res://MyMap/bunny/bunny1_jump.png" id="5_bx7fi"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0cu4h"]
+atlas = ExtResource("2_a4txx")
+region = Rect2(0, 0, 120, 207)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wx7hp"]
+atlas = ExtResource("4_as7kh")
+region = Rect2(0, 0, 120, 191)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_drplx"]
+atlas = ExtResource("5_bx7fi")
+region = Rect2(0, 0, 150, 181)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ikall"]
+atlas = ExtResource("2_a4txx")
+region = Rect2(0, 0, 120, 207)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rbpi7"]
+atlas = ExtResource("3_8a6u0")
+region = Rect2(0, 0, 120, 201)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xlm8g"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0cu4h")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wx7hp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_drplx")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ikall")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rbpi7")
+}],
+"loop": true,
+"name": &"run",
+"speed": 10.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kp0e0"]
+radius = 7.0
+height = 22.0
+
+[node name="player" type="CharacterBody2D"]
+z_index = 5
+collision_layer = 2
+script = ExtResource("1_rnkar")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -11)
+scale = Vector2(0.1125, 0.110377)
+sprite_frames = SubResource("SpriteFrames_xlm8g")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -11)
+shape = SubResource("CapsuleShape2D_kp0e0")
